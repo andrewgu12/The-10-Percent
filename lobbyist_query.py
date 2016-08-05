@@ -62,12 +62,14 @@ def search_issues(q):
 	print(countryJSON)
 	allCountries = list(countryDF.keys())
 
-	countryJSONNew = {}
+	countryJSONNew = []
 
 	for country in allCountries:
 		try:
 			abbrev = countryCodeLookup[country]
-			countryJSONNew[abbrev] = countryJSON[country]
+
+			countryJSONNew.append({ "hc-key": abbrev, 'value' : countryJSON[country]})
+			# countryJSONNew[abbrev] = countryJSON[country]
 		except:
 			continue
 
@@ -78,6 +80,6 @@ def search_issues(q):
 
 	return countryJSONNew
 
-search_issues('Trade')
+# search_issues('Trade')
 
 
