@@ -1,0 +1,28 @@
+<form>
+	<div class="form-group">
+		<label for="bills">Bills</label>
+		{{input value=value type="text" class="form-control" name="bills"}}
+	</div>
+	<button type="submit" class="btn btn-primary" {{action 'getBills'}}>Submit</button>
+</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Bill Name</th>
+			<th>Topic</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#if billData}}
+			{{#each billData as |bill|}}
+				<tr>
+					<td>bill.id</td>
+					<td>bill.name</td>
+					<td>bill.topic</td>
+				</tr>
+			{{/each}}
+		{{/if}}
+	</tbody>
+</table>
