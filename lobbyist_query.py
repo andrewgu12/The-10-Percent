@@ -31,5 +31,3 @@ def search_issues(q):
 	return countryJSON
 
 
-search_issues('Trade')
-
