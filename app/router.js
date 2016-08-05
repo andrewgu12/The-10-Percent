@@ -7,6 +7,8 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('bills');
+  this.route('lobbyists');
+  this.route('comments');
 });
 
 export default Router;

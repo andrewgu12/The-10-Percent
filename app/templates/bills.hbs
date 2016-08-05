@@ -3,26 +3,98 @@
 		<label for="bills">Bills</label>
 		{{input value=value type="text" class="form-control" name="bills"}}
 	</div>
-	<button type="submit" class="btn btn-primary" {{action 'getBills'}}>Submit</button>
+	<button type="submit" class="btn btn-default" {{action 'getBills'}}>Submit</button>
 </form>
 
-<table class="table">
+<table class="table table-striped table-bordered" id="bill-data">
 	<thead>
 		<tr>
 			<th>ID</th>
 			<th>Bill Name</th>
-			<th>Topic</th>
+			<th>Full Text</th>
+			<th>Year</th>
+			<th>Similar Bills</th>
 		</tr>
 	</thead>
 	<tbody>
 		{{#if billData}}
 			{{#each billData as |bill|}}
 				<tr>
-					<td>bill.id</td>
-					<td>bill.name</td>
-					<td>bill.topic</td>
+					<td>{{bill.doc_id}}</td>
+					<td>{{bill.title}}</td>
+					<td><a href={{bill.link}}>View</a></td>
+					<td>{{bill.year}}</td>
+					<td><a href="#" {{action 'getSimilarBills' bill.doc_id}}>View</a></td>
 				</tr>
 			{{/each}}
 		{{/if}}
 	</tbody>
 </table>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="similarBillsModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'closeModal'}}><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Similar Bills</h4>
+			</div>
+			<div class="modal-body">
+				{{#if keyPhrases}}
+					<h5>Key Phrases</h5>
+					<table class="table table-striped table-bordered">
+						<tbody>
+							{{#each keyPhrases as |phrase|}}
+								<tr>
+									<td>{{phrase}}</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				{{/if}}
+				{{#if similarUSBills}}
+					<h5>US Bills</h5>
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Full Text</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each similarUSBills as |bill|}}
+								{{log bill}}
+								<tr>
+									<td>{{bill.doc_id}}</td>
+									<td><a href={{bill.url}} target="_blank">View</a></td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				{{/if}}
+				{{#if similarEUBills}}
+					<h5>Historical EU Bills</h5>
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Full Text</th>
+							</tr>
+						</thead>
+						<tbody>
+								{{#each similarEUBills as |bill|}}
+									<tr>
+										<td>{{bill.doc_id}}</td>
+										<td><a href={{bill.url}} target="_blank">View</a></td>
+									</tr>
+								{{/each}}
+						</tbody>
+					</table>
+				{{/if}}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" {{action 'closeModal'}}>Close</button>
+			</div>
+		</div>
+	</div>
+</div>

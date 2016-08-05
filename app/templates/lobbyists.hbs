@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-md-3">
+		<select class="form-control" name="topics" onchange={{action "selectTopic" value="target.value"}}>
+			<option value=""></option>
+			{{#each topics as |topic|}}
+				<option value={{topic}}>{{topic}}</option>
+			{{/each}}
+		</select>
+	</div>
+</div>
+{{high-charts chartOptions=chartOptions mode='Map' content=chartData}}

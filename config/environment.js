@@ -19,6 +19,17 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.contentSecurityPolicy = {
+    'default-src' : "'none'",
+    'font-src'    : "'self' http://code.ionicframework.com http://fonts.gstatic.com",
+    'connect-src' : "'self'",
+    'img-src'     : "'self' http://www.google-analytics.com/ https://s3.amazonaws.com data:",
+    'style-src'   : "'self' 'unsafe-inline' http://fonts.gstatic.com http://fonts.googleapis.com http://code.ionicframework.com",
+    'media-src'   : "'self'",
+    'script-src'  : "'self' 'unsafe-eval' 'unsafe-inline' http://www.google-analytics.com/",
+    'report-uri'  : "'none"
+  }
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
